@@ -2,10 +2,12 @@
 
 from aws_cdk import core
 
-from ecs_dashboard.ecs_dashboard_stack import EcsDashboardStack
+from stacks.elb_stack import ElbStack
+from stacks.network_stack import NetworkStack
 
 
 app = core.App()
-EcsDashboardStack(app, "ecs-dashboard")
+network = NetworkStack(app, "network")
+ElbStack(app, "elb", network.vpc)
 
 app.synth()
